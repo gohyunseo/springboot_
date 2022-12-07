@@ -10,32 +10,33 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HelloController {
 
     @GetMapping("hello")
-    public String hello(Model model){
+    public String hello(Model model) {
         model.addAttribute("data", "hello!!!");
-        return "hello";
+        return  "hello";
     }
 
     @GetMapping("hello-mvc")
-    public String helloMVC(@RequestParam("name") String name, Model model){
+    public String helloMVC(@RequestParam("name") String name, Model model) {
         model.addAttribute("name", name);
         return "hello-template";
     }
 
     @GetMapping("hello-string")
     @ResponseBody
-    public String helloString(@RequestParam("name") String name){
-        return "hello, " + name;
+    public String helloString(@RequestParam("name") String name) {
+        return "hello, " + name;  /* @ResponseBody 이 어노테이션으로 단독의 api로 이용이 가능하게 되었다. */
     }
 
     @GetMapping("hello-api")
     @ResponseBody
-    public Hello helloApi(@RequestParam("name") String name){
+    public Hello helloApi(@RequestParam("name") String name) {
         Hello hello = new Hello();
         hello.setName(name);
         return hello;
     }
 
     static class Hello{
+
         private String name;
 
         public String getName() {
@@ -46,4 +47,5 @@ public class HelloController {
             this.name = name;
         }
     }
+
 }
